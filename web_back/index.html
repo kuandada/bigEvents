@@ -123,21 +123,24 @@
 
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
     <script>
-        $(function () {
-            $('#btn_logout').on('click', function (e) {
+        $(function(){
+            $('#btn_logout').on('click',function(e){
                 e.preventDefault();
                 $.ajax({
-                    type: 'post',
-                    url: 'https://autumnfish.cn/big/admin/logout',
-                    success: function (backData) {
+                    type:'post',
+                    url:'https://autumnfish.cn/big/admin/logout',
+                    success:function(backData){
                         if(backData.code == 200){
                             window.location.href = './login.html';
                         }else{
+                            $('.modal-body').text('登出失败');
                             $('#myModal').modal({
                                 keyboard:true
-                            })
+                            });
+
                         }
-                }
+                    }
+
                 })
             })
         })
