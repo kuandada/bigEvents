@@ -54,42 +54,39 @@
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
 
     <script>
-        $(function () {
-            $('.input_sub').on('click', function (e) {
+        $(function(){
+            $('.input_sub').on('click',function(e){
                 e.preventDefault();
                 var username = $('.input_txt').val().trim();
                 var password = $('.input_pass').val().trim();
-                if (username == "" || password == "") {
-                    // alert('您的输入有问题,请重新输入');
-                    $('.modal-body').text('账号或密码为空,请重新输入!');
+                if(username == "" || password == ""){
+                    $('.modal-body').text('内容为空,请重新输入');
                     $('#myModal').modal({
-                        keyboard: true
+                        keyboard:true
                     });
                     return;
                 }
-                $.ajax({
-                    type: 'post',
-                    url: 'https://autumnfish.cn/big/admin/login',
-                    data: {
-                        user_name: username,
-                        password: password
-                    },
-                    success: function (backData) {
-                        // console.log(backData);
-                        if (backData.code != 200) {
-                            // alert('请重新输入');
-                            $('.modal-body').text('账号或密码为空,请重新输入!');
-                            $('#myModal').modal({
-                                keyboard: true
-                            });
-                        } else {
-                            window.location.href = "./index.html";
-                        }
 
+                $.ajax({
+                    type:'post',
+                    url:'https://autumnfish.cn/big/admin/login',
+                    data:{
+                        user_name:username,
+                        password:password
+                    },
+                    success:function(backData){
+                        // console.log(backData);
+                        if(backData.code != 200){
+                            $('.modal-body').text('您输入的用户名或密码错误');
+                            $('#myModal').modal({
+                                keyboard:true
+                            })
+                        }else{
+                            window.location.href = './index.html';
+                        }
+                        
                     }
                 })
-
-
             })
         })
     </script>
