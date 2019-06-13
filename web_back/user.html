@@ -47,7 +47,7 @@
                         <label for="exampleInputFile">
                             <img src="./images/uploadFileIcon.png" alt="">
                         </label>
-                        <input type="file" style="opacity: 0" name="uesr_pic" id="exampleInputFile">
+                        <input type="file" name="user_pic" id="exampleInputFile">
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                 type:'get',
                 url:'http://localhost:8000/admin/userinfo_get ',
                 success:function(backData){
-                    console.log(backData);
+                    // console.log(backData);
                     // $('input.username').val(backData.data.username);
                     // $('input.nickname').val(backData.data.nickname);
                     for(var key in backData.data){
@@ -82,7 +82,35 @@
                     }
                     $('img.user_pic').attr('src',backData.data.user_pic);
                 }
-            })
+            });
+
+            $('#exampleInputFile').on('change',function(){
+                var icon = this.files[0];
+
+                var url = URL.createObjectURL(icon);
+
+                $('.user_pic').attr('src',url);
+            });
+
+
+            $('.btn-success').on('click',function(e){
+                e.preventDefault();
+                var formData = new FormData($('.article_form')[0]);
+                $.ajax({
+                    type:'post',
+                    url: 'http://localhost:8000/admin/userinfo_edit',
+                    data: formData,
+                    contentType:false,
+                    processData:false,
+                    success:function(backData){
+                        console.log(backData);
+                        
+                    }
+                })
+            });
+            //注意:
+            //$("#objid"); 如果这样写获取到的是document页面中的id为objid的元素
+            //$("#objid", parent.document); 这样写 获取到的是parent.document 里面的 id为objid的元素
         })
     </script>
 </body>

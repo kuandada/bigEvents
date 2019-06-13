@@ -148,7 +148,7 @@
                 type:'get',
                 url:'http://localhost:8000/admin/getuser',
                 success:function(backData){
-                    console.log(backData);
+                    // console.log(backData);
                     $('.user_info>span>b').text(backData.data.nickname);
                     $('.user_info>img').attr('src',backData.data.user_pic);
 
